@@ -1,0 +1,263 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --text-color: #333;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --sidebar-width: 70px;
+    --sidebar-expanded-width: 250px;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.3); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+body {
+    font-family: 'Tajawal', 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* زر القائمة */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* الشريط الجانبي */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 10px;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.sidebar.expanded {
+    width: var(--sidebar-expanded-width);
+    padding: 20px;
+}
+
+.sidebar-header {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 30px;
+    text-align: center;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.sidebar.expanded .sidebar-header {
+    opacity: 1;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px 10px;
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.sidebar-nav a:hover, .sidebar-nav a.active {
+    background-color: var(--secondary-color);
+}
+
+.sidebar-nav i {
+    margin-left: 0;
+    font-size: 20px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.sidebar-nav span {
+    margin-right: 10px;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.sidebar.expanded .sidebar-nav span {
+    opacity: 1;
+    margin-right: 15px;
+}
+
+/* مؤشر الإشعارات */
+.notification-badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+    margin-right: var(--sidebar-width);
+    padding: 30px;
+    transition: all 0.3s;
+}
+
+body.sidebar-expanded .main-content {
+    margin-right: var(--sidebar-expanded-width);
+}
+
+/* صفحة المفضلة */
+.favorites-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 25px;
+}
+
+.favorites-title {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.favorite-card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.favorite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-image {
+    height: 150px;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+}
+
+.favorite-details {
+    padding: 15px;
+}
+
+.favorite-hotel-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: var(--primary-color);
+}
+
+.favorite-hotel-location {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.favorite-hotel-location i {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.favorite-price {
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.remove-favorite {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--accent-color);
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.remove-favorite:hover {
+    background: var(--accent-color);
+    color: white;
+}
+.hotel-rating {
+    color: #ffc107;
+    margin-bottom: 8px;
+}
