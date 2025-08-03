@@ -275,13 +275,11 @@ public function verifyCode(Request $request)
 
     function mosthotelrating(){
 
-        $hotels = hotel::with('ratings')->get();
-        $hotels->map(function ($hotel) {
-            $hotel->avg_rating = round($hotel->ratings->avg('rating'), 1);
-            return $hotel;
-        });
+        $sortedHotels = Hotel::withAvg('ratings', 'rating')
+        ->orderByDesc('ratings_avg_rating')
+        ->take(6)
+        ->get();
 
-        $sortedHotels = $hotels->sortByDesc('avg_rating')->take(6);
 
         return view('user.mostratinghotel',compact('sortedHotels'));
     }
