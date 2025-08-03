@@ -69,9 +69,11 @@
                 @foreach ($hotel->comments as $comment)
     <div class="comment">
         <div class="comment-header">
+            @foreach ($hotel->ratings as $rating)
             <span class="comment-rating">
-                {{ str_repeat('★', $comment->rating) . str_repeat('☆', 5 - $comment->rating) }}
+                {{ str_repeat('★', $rating->rating) . str_repeat('☆', 5 - $rating->rating) }}
             </span>
+           @endforeach
             <span class="comment-author">{{ $comment->user->name ?? 'ضيف' }}</span>
             <span class="comment-date">{{ $comment->created_at->format('d M Y') }}</span>
         </div>
