@@ -33,13 +33,12 @@ class AdminController extends Controller
 
     public function hotelRequests(Request $request)
 {
-    $query = Hotel::with(['owner', 'images','ratings']);
+    $requests= Hotel::with(['owner', 'images','ratings'])->latest();
 
     if ($request->has('search') && $request->search !== null) {
         $query->where('name', 'LIKE', '%' . $request->search . '%');
     }
 
-    $requests = $query->orderBy('created_at', 'desc')->get();
 
     return view('admin.controlhotel', compact('requests'));
 }
